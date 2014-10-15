@@ -1,0 +1,48 @@
+<div class="issue-box-details">
+  <div class="line line-small">
+    {{severityIcon severity}}&nbsp;{{statusIcon status}}{{t "issue.status" status}}
+    {{#if resolution}}({{t "issue.resolution" resolution}}){{/if}}
+    {{fUpdateAge}}
+
+    <div class="line-right">
+      <a>Actions <i class="icon-dropdown"></i></a>
+    </div>
+  </div>
+
+  <div class="line line-nowrap" title="{{message}}">
+    {{message}}
+  </div>
+
+  <div class="line">
+    {{#unless singleProject}}
+      <div class="subtitle line-nowrap">{{default projectLongName projectName}}</div>
+    {{/unless}}
+    <div class="subtitle line-nowrap">{{componentLongName}}</div>
+  </div>
+
+</div>
+
+<div class="issue-box-snippet">
+  <table class="code">
+    <tr class="row" data-line-number="116" id="view10-116">
+      <!--<td class="stat lid js-line-actions" title="Line Actions">116</td>-->
+      <td class="line"><pre><span class="a">@<span class="sym-1176 sym">CheckForNull</span></span></pre></td>
+    </tr>
+    <tr class="row" data-line-number="117" id="view10-117">
+      <!--<td class="stat lid js-line-actions" title="Line Actions">117</td>-->
+      <td class="line"><pre><span class="k">private </span>V <span class="sym-3169 sym">doGet</span>() {</pre></td>
+    </tr>
+    <tr class="row" data-line-number="118" id="view10-118">
+      <!--<td class="stat lid js-line-actions" title="Line Actions">118</td>-->
+      <td class="line issue"><pre>  <span class="k">try </span>{</pre></td>
+    </tr>
+    <tr class="row" data-line-number="119" id="view10-119">
+      <!--<td class="stat lid js-line-actions" title="Line Actions">119</td>-->
+      <td class="line"><pre>    <span class="sym-1472 sym">exchange</span>.fetch();</pre></td>
+    </tr>
+    <tr class="row" data-line-number="120" id="view10-120">
+      <!--<td class="stat lid js-line-actions" title="Line Actions">120</td>-->
+      <td class="line"><pre>    <span class="k">if </span>(!<span class="sym-1472 sym">exchange</span>.getValue().isDefined()) {</pre></td>
+    </tr>
+  </table>
+</div>
