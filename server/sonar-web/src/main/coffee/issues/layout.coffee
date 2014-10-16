@@ -12,7 +12,8 @@ define [
 
     regions:
       facetsRegion: '.issues-facets'
-      workspaceRegion: '.issues-workspace'
+      workspaceHeaderRegion: '.issues-workspace-header'
+      workspaceListRegion: '.issues-workspace-list'
 
 
     showSpinner: (region) ->

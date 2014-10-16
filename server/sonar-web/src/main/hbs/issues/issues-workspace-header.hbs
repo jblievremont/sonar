@@ -1,0 +1,15 @@
+<span class="issues-workspace-header-item">
+  Issues: {{default paging.fTotal '—'}}
+</span>
+
+<span class="issues-workspace-header-item">
+  Debt: 3d 7h
+</span>
+
+<span class="issues-workspace-header-item">
+  {{t 'issues.ordered_by'}}
+  <a class="js-issues-order">
+    {{t 'issues.sort' orderBy}}
+    {{#if state.orderAsc}}<i class="icon-sort-asc"></i>{{else}}<i class="icon-sort-desc"></i>{{/if}}
+  </a>
+</span>

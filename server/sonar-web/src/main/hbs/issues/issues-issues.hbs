@@ -2,22 +2,17 @@
   <span class="issues-workspace-header-item">
     Issues: <span class="js-issues-total"></span>
   </span>
-  <span class="issues-workspace-header-item">
-    <span class="issues-distribution-bar">
-      <span class="issues-distribution-bar-item s-blocker" style="width: 10%;"></span>
-      <span class="issues-distribution-bar-item s-critical" style="width: 75%;"></span>
-      <span class="issues-distribution-bar-item s-major" style="width: 100%;"></span>
-      <span class="issues-distribution-bar-item s-minor" style="width: 50%;"></span>
-      <span class="issues-distribution-bar-item s-info" style="width: 25%;"></span>
-    </span>
-  </span>
+
   <span class="issues-workspace-header-item">
     Debt: <span class="js-issues-debt-total"></span>
   </span>
 
-  <span class="issues-workspace-header-item issues-workspace-header-item-right">
+  <span class="issues-workspace-header-item">
     {{t 'issues.ordered_by'}}
-    <a>{{t 'issues.sort' orderBy}} {{#if state.orderAsc}}&uarr;{{else}}&darr;{{/if}}</a>
+    <a class="js-issues-order">
+      {{t 'issues.sort' orderBy}}
+      {{#if state.orderAsc}}<i class="icon-sort-asc"></i>{{else}}<i class="icon-sort-desc"></i>{{/if}}
+    </a>
   </span>
 </div>
 

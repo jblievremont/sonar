@@ -23,6 +23,7 @@ requirejs [
   'issues/layout'
   'issue/collections/issues'
   'issues/issues-view'
+  'issues/workspace-header-view'
 
   'common/handlebars-extensions'
 ], (
@@ -32,6 +33,7 @@ requirejs [
   Layout
   Issues
   IssuesView
+  WorkspaceHeaderView
 ) ->
 
   $ = jQuery
@@ -45,14 +47,26 @@ requirejs [
 
   App.addInitializer ->
     @state = new State()
+    @state.on 'change:orderBy', => @fetchIssues()
+    @state.on 'change:orderAsc', => @fetchIssues()
+    @issues = new Issues()
 
 
   App.addInitializer ->
-    @issues = new Issues()
     @issuesView = new IssuesView
       app: @
       collection: @issues
-    @layout.workspaceRegion.show @issuesView
+    @layout.workspaceListRegion.show @issuesView
+
+
+  App.addInitializer ->
+    @workspaceHeaderView = new WorkspaceHeaderView
+      app: @
+      collection: @issues
+    @layout.workspaceHeaderRegion.show @workspaceHeaderView
+
+
+  App.addInitializer ->
     @fetchIssues()
 
 
