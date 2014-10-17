@@ -22,7 +22,7 @@ requirejs [
   'issues/state'
   'issues/layout'
   'issue/collections/issues'
-  'issues/issues-view'
+  'issues/workspace-list-view'
   'issues/workspace-header-view'
 
   'common/handlebars-extensions'
@@ -32,7 +32,7 @@ requirejs [
   State
   Layout
   Issues
-  IssuesView
+  WorkspaceListView
   WorkspaceHeaderView
 ) ->
 
@@ -53,7 +53,7 @@ requirejs [
 
 
   App.addInitializer ->
-    @issuesView = new IssuesView
+    @issuesView = new WorkspaceListView
       app: @
       collection: @issues
     @layout.workspaceListRegion.show @issuesView
@@ -70,15 +70,23 @@ requirejs [
     @fetchIssues()
 
 
-  App.fetchIssues = ->
+  App.fetchIssues = (remove = true) ->
     data =
-      ps: 20
+      p: @state.get 'page'
+      ps: 200
       resolved: false
+      severities: 'MINOR'
       extra_fields: 'actions,transitions,assigneeName,reporterName,actionPlanName'
       s: @state.get 'orderBy'
       asc: @state.get 'orderAsc'
     @issues.fetch
+      remove: remove
       data: data
+
+
+  App.fetchNextPage = ->
+    @state.nextPage()
+    @fetchIssues false
 
 
   l10nXHR = window.requestMessages()

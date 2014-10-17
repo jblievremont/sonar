@@ -19,8 +19,11 @@ define [
         searchDict[keyField || 'key'] = key
         _.findWhere(source, searchDict) || key
 
-      @paging = r.paging
-      @maxResultsReached = r.maxResultsReached
+      @paging =
+        p: r.p
+        ps: r.ps
+        total: r.total
+        maxResultsReached: r.p * r.ps >= r.total
 
       r.issues.map (issue) ->
         component = find r.components, issue.component
