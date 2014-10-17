@@ -1,23 +1,11 @@
 define [
-  'backbone.marionette'
-  'templates/issues'
   'issue/issue-view'
+  'templates/issues'
 ], (
-  Marionette
+  IssueView
   Templates
-  IssueBoxView
 ) ->
 
-  class extends Marionette.ItemView
-    tagName: 'li'
-    className: 'issue-box'
+
+  class extends IssueView
     template: Templates['issues-issue']
-
-
-    onRender: ->
-      @issueBoxView = new IssueBoxView model: @model
-      @$('.issue-box-details').append @issueBoxView.render().el
-
-
-    onClose: ->
-      @issueBoxView?.close()

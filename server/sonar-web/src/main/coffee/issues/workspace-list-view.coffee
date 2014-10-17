@@ -1,7 +1,7 @@
 define [
   'backbone.marionette'
   'templates/issues'
-  'issues/issue-view'
+  'issues/workspace-list-item-view'
 ], (
   Marionette
   Templates

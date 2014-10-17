@@ -268,6 +268,14 @@ define(['handlebars'], function (Handlebars) {
     }
   });
 
+  Handlebars.registerHelper('withLast', function(list, options) {
+    if (list && list.length > 0) {
+      return options.fn(list[list.length - 1]);
+    } else {
+      return '';
+    }
+  });
+
   Handlebars.registerHelper('withoutFirst', function(list, options) {
     if (list && list.length > 1) {
       return list.slice(1).reduce(function(prev, current) {

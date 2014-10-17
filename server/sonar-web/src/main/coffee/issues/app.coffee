@@ -73,7 +73,7 @@ requirejs [
   App.fetchIssues = (remove = true) ->
     data =
       p: @state.get 'page'
-      ps: 200
+      ps: 50
       resolved: false
       severities: 'MINOR'
       extra_fields: 'actions,transitions,assigneeName,reporterName,actionPlanName'
