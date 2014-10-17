@@ -85,6 +85,7 @@ public class SearchActionMediumTest {
 
     // project can be seen by anyone
     tester.get(PermissionFacade.class).insertGroupPermission(project.getId(), DefaultGroups.ANYONE, UserRole.USER, session);
+    tester.get(PermissionFacade.class).insertGroupPermission(project.getId(), DefaultGroups.ANYONE, UserRole.CODEVIEWER, session);
     db.issueAuthorizationDao().synchronizeAfter(session, new Date(0));
 
     file = new ComponentDto()
@@ -414,6 +415,34 @@ public class SearchActionMediumTest {
 
     WsTester.Result result = request.execute();
     result.assertJson(this.getClass(), "default_page_size_is_100.json", false);
+  }
+
+  @Test
+  public void issue_on_line() throws Exception {
+    db.userDao().insert(session, new UserDto().setLogin("simon").setName("Simon").setEmail("simon@email.com"));
+    db.userDao().insert(session, new UserDto().setLogin("fabrice").setName("Fabrice").setEmail("fabrice@email.com"));
+
+    IssueDto issue = IssueTesting.newDto(rule, file, project)
+      .setLine(42)
+      .setRule(rule)
+      .setDebt(10L)
+      .setRootComponent(project)
+      .setComponent(file)
+      .setStatus("OPEN").setResolution("OPEN")
+      .setKee("82fd47d4-b650-4037-80bc-7b112bd4eac2")
+      .setSeverity("MAJOR")
+      .setAuthorLogin("John")
+      .setAssignee("simon")
+      .setReporter("fabrice")
+      .setActionPlanKey("AP-ABCD")
+      .setIssueCreationDate(DateUtils.parseDate("2014-09-04"))
+      .setIssueUpdateDate(DateUtils.parseDate("2014-12-04"));
+    db.issueDao().insert(session, issue);
+    session.commit();
+
+    WsTester.Result result = wsTester.newGetRequest(IssuesWs.API_ENDPOINT, SearchAction.SEARCH_ACTION).execute();
+    // TODO date assertion is complex to test, and components id are not predictable, that's why strict boolean is set to false
+    result.assertJson(this.getClass(), "issue.json", false);
   }
 
 }
